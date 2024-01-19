@@ -30,8 +30,11 @@ export default class TicketService {
         var TotalSeatsToAllocate = #GetTotalSeatsToAllocate();
         reservationService.reserveSeat(accountId, TotalSeatsToAllocate);
 
-        return new TicketResult{ TotalAmountToPay, TotalSeatsToAllocate };
+        var result = new TicketResult();
+        result.Cost = TotalAmountToPay;
+        result.Seats = TotalSeatsToAllocate;
     }
+    
 
     #GetTotalNumberOfTickets(...ticketTypeRequests) {
         return ticketTypeRequests.Select(x => x.GetNoOfTickets()).Sum();
